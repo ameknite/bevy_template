@@ -14,11 +14,11 @@ on:
       run_build_webgpu:
         type: string
       optimize_wasm:
-        type: boolean  
+        type: string  
       web_graphic_api:
         type: string
       run_publish_github_pages:
-        type: boolean
+        type: string
      
 
 jobs:
