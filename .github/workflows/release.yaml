@@ -9,11 +9,11 @@ env:
   # Build platforms
 
   # Valid platforms: wasm(webgl,webgpu), linux, windows, macos(intel,apple)
-  # - Write "intel" or "apple" to build for "macos_intel" or "macos_apple_silicon," respectively.
+  # - Write "intel" and "apple" to build for "macos_intel" and "macos_apple_silicon," respectively.
   # - Write "macos" to build for both "intel" and "apple"
-  # - Write "webgl" or "webgpu" to build for "webgl" or "webgpu" respectively.
-  # - Write "web" or "wasm" to build for webgl
-  build_for: web, linux, windows, macos
+  # - Write "webgl" and "webgpu" to build for "webgl" and "webgpu" respectively.
+  # - Write "wasm" to build for webgl
+  build_for: wasm, linux, windows, macos
 
   # WASM configuration
   optimize_wasm: true
@@ -31,7 +31,7 @@ env:
   # Example of itchio_target: cart/build-a-better-buddy
   # Check the url of your game page in itch.io
 
-  # Publish configuration
+  # Github Pages configuration
   # Valid apis: (webgl|webgpu)
   web_graphic_api: webgl
 
@@ -55,7 +55,7 @@ on:
         type: string
       build_for:
         description: "Build for:"
-        default: web,linux,windows,macos
+        default: wasm,linux,windows,macos
       publish_to:
         description: "Publish to:"
         default: releases,itchio,pages
@@ -83,7 +83,7 @@ jobs:
         uses: olegtarasov/get-tag@v2.1.2
 
     outputs:
-      run_build_webgl: ${{ ( inputs.tag &&  (contains(inputs.build_for, 'web') || contains(inputs.build_for, 'wasm') || contains(inputs.build_for, 'wegbl')) ) || ( !inputs.tag && (contains(env.build_for, 'web') || contains(env.build_for, 'wasm') || contains(inputs.build_for, 'wegbl'))  ) }}
+      run_build_webgl: ${{ ( inputs.tag &&  ( contains(inputs.build_for, 'wasm') || contains(inputs.build_for, 'wegbl')) ) || ( !inputs.tag && ( contains(env.build_for, 'wasm') || contains(inputs.build_for, 'wegbl'))  ) }}
       run_build_webgpu: ${{ ( inputs.tag &&  contains(inputs.build_for, 'webgpu') ) || ( !inputs.tag && contains(env.build_for, 'webgpu' ) ) }}
       run_build_linux: ${{ (inputs.tag && contains(inputs.build_for, 'linux')) || (!inputs.tag && contains(env.build_for, 'linux') ) }}
       run_build_windows: ${{ ( inputs.tag && contains(inputs.build_for, 'windows')) || (!inputs.tag && contains(env.build_for, 'windows') ) }}
@@ -101,7 +101,7 @@ jobs:
   # Build for Web/WASM
   build-web:
     needs: load-env
-    if: needs.load-env.outputs.run_build_webgl == 'true'
+    if: needs.load-env.outputs.run_build_webgl == 'true' || needs.load-env.outputs.run_build_webgpu == 'true'
     uses: ./.github/workflows/web.yaml
     name: build
     with:
