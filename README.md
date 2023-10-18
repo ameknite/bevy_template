@@ -44,7 +44,7 @@ git push --tags
 
  By default, the workflow will build for the Web, Linux, Windows, and MacOS. The builds will be uploaded to a GitHub Release. If the name of your repository does not match the name of your binary, you should update the environment variable [`binary`](.github/workflows/release.yaml#L7) in the `release.yaml` file to your binary name.
 
-You can configure the [build](.github/workflows/release.yaml#L15) and [publish](.github/workflows/release.yaml#L21) targets by changing the [environment variables](.github/workflows/release.yaml#L4)  in the `release.yaml` file.
+You can configure the [build](.github/workflows/release.yaml#L16) and [publish](.github/workflows/release.yaml#L25) targets by changing the [environment variables](.github/workflows/release.yaml#L4)  in the `release.yaml` file.
 
 #### Manual Workflow run in GitHub
 
@@ -64,7 +64,7 @@ You can build for the following platforms:
 * For MacOS, generate two versions: one for Intel x86_64 and one for Apple Silicon ARM64, each packaged in a .dmg image containing a .app file with the assets.
 * For the Web, produce a .zip archive with the WebAssembly (wasm) binary, JavaScript bindings, an HTML file for loading it, and the assets.
 
-By default, it builds for all platforms, but you can disable specific targets by removing their name in the env variable [`build_for`](.github/workflows/release.yaml#L15) in the release.yaml file.
+By default, it builds for all platforms, but you can disable specific targets by removing their name in the env variable [`build_for`](.github/workflows/release.yaml#L16) in the release.yaml file.
 
 For example, `build_for: web, linux, macos` will build for the Web, Linux and MacOS but will not build for windows.
 
@@ -80,7 +80,7 @@ You can publish to the following platforms:
 * [Itch.io](#publish-to-itchio)
 * [Github Pages](#publish-to-github-pages)
 
-By default, it only publishes to GitHub Releases, but you can enable or disable any target by writing or removing their name in the env variable [`publish_to`](.github/workflows/release.yaml#L21) in the release.yaml file.
+By default, it only publishes to GitHub Releases, but you can enable or disable any target by writing or removing their name in the env variable [`publish_to`](.github/workflows/release.yaml#L25) in the release.yaml file.
 
 For example, `publish_github_pages: pages` will only publish the web version of your game to GitHub Pages.
 
@@ -96,7 +96,7 @@ For example: `bevy-game_v3.6_linux.zip`
 
 ### Publish to Github Releases
 
-This action will occur automatically every time you push a tag if you have written `github_releases` to the env variable [`publish_to`](./.github/workflows/release.yaml#L28) in the release.yaml file.
+This action will occur automatically every time you push a tag if you have written `github_releases` to the env variable [`publish_to`](./.github/workflows/release.yaml#L25) in the release.yaml file.
 
 However, if you prefer more configuration options to manage your releases, you can do so through the GitHub CLI or the web browser:
 
@@ -116,12 +116,12 @@ To publish to itch.io, follow this release flow:
 1. Create an API key at <https://itch.io/user/settings/api-keys>
 2. In your GitHub repository, go to the `Settings` tab, click on `Secrets` under the `Actions` section in the sidebar, and add a repository secret named `BUTLER_CREDENTIALS`, with the API key as its value.
 3. Create your game page on itch.io if you haven't already.
-4. In the release.yaml file, write  `itchio` in the env variable [`publish_to`](./.github/workflows/release.yaml#L21).
-5. Go to the env variable [`itchio_target`](./.github/workflows/release.yaml#L19) in the release.yaml and set it to your itch.io username and the name of the game on itch.io, separated by a slash (`/`). For example: `cart/build-a-better-buddy`. Double-check the URL of your game to ensure the name is correct.
+4. In the release.yaml file, write  `itchio` in the env variable [`publish_to`](./.github/workflows/release.yaml#L25).
+5. Go to the env variable [`itchio_target`](./.github/workflows/release.yaml#L30) in the release.yaml and set it to your itch.io username and the name of the game on itch.io, separated by a slash (`/`). For example: `cart/build-a-better-buddy`. Double-check the URL of your game to ensure the name is correct.
 
 Once these steps are completed, any tag pushed to GitHub will trigger an itch.io release, and it will use the tag as the [user version](https://itch.io/docs/butler/pushing.html#specifying-your-own-version-number).
 
-If you want to make your game playable directly on your Itch.io page, follow the steps above, and make sure to build it for the web by writing `web` or `wasm` in the env variable [`publish_for`](./.github/workflows/release.yaml#L21).
+If you want to make your game playable directly on your Itch.io page, follow the steps above, and make sure to build it for the web by writing `web` or `wasm` in the env variable [`publish_for`](./.github/workflows/release.yaml#L25).
 Next, to make the game visible on your Itch.io page, go to your game's configuration on Itch.io, and change the `Kind of project` to `HTML`. Additionally, locate your uploaded web files and check the box that says, `This file will be played in the browser`.
 
 ![Kind of project](https://user-images.githubusercontent.com/104745335/268805329-fb70e23e-44ee-4f2f-9d20-11d58ddeec9a.png)
@@ -134,7 +134,7 @@ If you want to publish by manually triggering a workflow in GitHub, instead of d
 
 If you want to publish your game to be playable in the browser on a [GitHub page](https://pages.github.com/) follow these steps:
 
-1. In the release.yaml file, verify that you are writing `github_pages` to the env variable [`publish_to`](./.github/workflows/release.yaml#L21) and `web` in the env variable [`build_for`](./.github/workflows/release.yaml#L15).
+1. In the release.yaml file, verify that you are writing `github_pages` to the env variable [`publish_to`](./.github/workflows/release.yaml#L25) and `web` in the env variable [`build_for`](./.github/workflows/release.yaml#L16).
 2. Trigger the [release.yaml](./.github/workflows/release.yaml) workflow by pushing a tag.
 3. In your GitHub repository, go to the `Settings` tab, then click on `Pages` in the sidebar. Navigate to the `Build and Deployment` section and select `Github Actions` as the `Source`. ![Github Pages](https://user-images.githubusercontent.com/104745335/270078892-a6da763e-5a4a-4f55-8d3c-41a14e8423e2.png)
 4. Wait a few minutes and your page will be available at a URL following this structure: `https://<Your GitHub username>.github.io/<Name of your repository>/`
