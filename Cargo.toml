@@ -1,0 +1,49 @@
+[package]
+name = "bevy_game"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+[dependencies]
+bevy = { version = "0.11", default-features = false}
+
+[features]
+default = [
+    "webgpu",
+    "bevy/webgl2",
+]
+
+webgpu = [
+    "bevy/animation",
+    "bevy/bevy_asset",
+    "bevy/bevy_audio",
+    "bevy/bevy_gilrs",
+    "bevy/bevy_scene",
+    "bevy/bevy_winit",
+    "bevy/bevy_core_pipeline",
+    "bevy/bevy_pbr",
+    "bevy/bevy_gltf",
+    "bevy/bevy_render",
+    "bevy/bevy_sprite",
+    "bevy/bevy_text",
+    "bevy/bevy_ui",
+    "bevy/multi-threaded",
+    "bevy/png",
+    "bevy/hdr",
+    "bevy/ktx2",
+    "bevy/zstd",
+    "bevy/vorbis",
+    "bevy/x11",
+    "bevy/bevy_gizmos",
+    "bevy/android_shared_stdcxx",
+    "bevy/tonemapping_luts",
+    "bevy/default_font",
+]
