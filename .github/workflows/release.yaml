@@ -94,11 +94,11 @@ jobs:
       run_publish_github_releases: ${{ ( inputs.tag && contains(inputs.publish_to, 'releases')) || (!inputs.tag && contains(env.publish_to, 'releases') ) }}
       run_publish_itchio: ${{ ( inputs.tag && contains(inputs.publish_to, 'itchio')) || (!inputs.tag && contains(env.publish_to, 'itchio') ) }}
       run_publish_github_pages: ${{ ( inputs.tag && contains(inputs.publish_to, 'pages')) || (!inputs.tag && contains(env.publish_to, 'pages') ) }}
+      optimize_wasm: ${{(inputs.tag && inputs.optimize_wasm) || (!inputs.tag && env.optimize_wasm)}}
+      web_graphic_api: ${{(inputs.tag && inputs.web_graphic_api) || (!inputs.tag && env.web_graphic_api)}}
       itchio_target: ${{ inputs.itchio_target || env.itchio_target }}
       tag: ${{ ( inputs.tag || steps.get_version.outputs.tag ) }}
       binary_name: ${{ inputs.binary_name ||  env.binary_name }}
-      optimize_wasm: ${{(inputs.tag && inputs.optimize_wasm) || (!inputs.tag && env.optimize_wasm)}}
-      web_graphic_api: ${{(inputs.tag && inputs.web_graphic_api) || (!inputs.tag && env.web_graphic_api)}}
 
   # Build for Web/WASM
   build-web:
