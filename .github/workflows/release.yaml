@@ -2,9 +2,9 @@ name: Release
 
 # Configure your build and release platforms
 env:
-  # If your repo name differs from your binary name, change it.
+  # If your repo name differs from your binary_name name, change it.
   # Check you Cargo.toml -> package -> name
-  binary: ${{ github.event.repository.name }}
+  binary_name: ${{ github.event.repository.name }}
 
   # Build platforms
 
@@ -12,7 +12,7 @@ env:
   # - Write "intel" and "apple" to build for "macos_intel" and "macos_apple_silicon," respectively.
   # - Write "macos" to build for both "intel" and "apple"
   # - Write "webgl" and "webgpu" to build for "webgl" and "webgpu" respectively.
-  # - Write "wasm" to build for webgl
+  # - Write "wasm" to build for "webgl" and "webgpu"
   build_for: wasm, linux, windows, macos
 
   # WASM configuration
@@ -53,6 +53,8 @@ on:
         description: "Add tag version: (e.g. -> v3.6.1)"
         required: true
         type: string
+      binary_name:
+        type: string
       build_for:
         description: "Build for:"
         default: wasm,linux,windows,macos
@@ -83,8 +85,8 @@ jobs:
         uses: olegtarasov/get-tag@v2.1.2
 
     outputs:
-      run_build_webgl: ${{ ( inputs.tag &&  ( contains(inputs.build_for, 'wasm') || contains(inputs.build_for, 'wegbl')) ) || ( !inputs.tag && ( contains(env.build_for, 'wasm') || contains(inputs.build_for, 'wegbl'))  ) }}
-      run_build_webgpu: ${{ ( inputs.tag &&  contains(inputs.build_for, 'webgpu') ) || ( !inputs.tag && contains(env.build_for, 'webgpu' ) ) }}
+      run_build_webgl: ${{ ( inputs.tag &&  ( contains(inputs.build_for, 'wasm') || contains(inputs.build_for, 'wegbl')) ) || ( !inputs.tag && ( contains(env.build_for, 'wasm') || contains(env.build_for, 'wegbl'))  ) }}
+      run_build_webgpu: ${{ ( inputs.tag &&  ( contains(inputs.build_for, 'wasm') || contains(inputs.build_for, 'webgpu') ) ) || ( !inputs.tag && ( contains(env.build_for, 'wasm') || contains(env.build_for, 'webgpu' ) ) ) }}
       run_build_linux: ${{ (inputs.tag && contains(inputs.build_for, 'linux')) || (!inputs.tag && contains(env.build_for, 'linux') ) }}
       run_build_windows: ${{ ( inputs.tag && contains(inputs.build_for, 'windows')) || (!inputs.tag && contains(env.build_for, 'windows') ) }}
       run_build_macos_intel:  ${{ ( inputs.tag && ( contains(inputs.build_for, 'intel') || contains(inputs.build_for, 'macos') )) || (!inputs.tag && (contains(env.build_for, 'intel') || contains(env.build_for, 'macos')) ) }}
@@ -94,7 +96,7 @@ jobs:
       run_publish_github_pages: ${{ ( inputs.tag && contains(inputs.publish_to, 'pages')) || (!inputs.tag && contains(env.publish_to, 'pages') ) }}
       itchio_target: ${{ inputs.itchio_target || env.itchio_target }}
       tag: ${{ ( inputs.tag || steps.get_version.outputs.tag ) }}
-      binary: ${{ env.binary }}
+      binary_name: ${{ inputs.binary_name ||  env.binary_name }}
       optimize_wasm: ${{(inputs.tag && inputs.optimize_wasm) || (!inputs.tag && env.optimize_wasm)}}
       web_graphic_api: ${{(inputs.tag && inputs.web_graphic_api) || (!inputs.tag && env.web_graphic_api)}}
 
@@ -106,7 +108,7 @@ jobs:
     name: build
     with:
       tag: ${{ needs.load-env.outputs.tag }}
-      binary: ${{ needs.load-env.outputs.binary }}
+      binary: ${{ needs.load-env.outputs.binary_name }}
       web_graphic_api: ${{ needs.load-env.outputs.web_graphic_api }}
       optimize_wasm: ${{ needs.load-env.outputs.optimize_wasm }}
       run_build_webgl: ${{ needs.load-env.outputs.run_build_webgl }}
@@ -121,7 +123,7 @@ jobs:
     name: build
     with:
       tag: ${{ needs.load-env.outputs.tag }}
-      binary: ${{ needs.load-env.outputs.binary }}
+      binary: ${{ needs.load-env.outputs.binary_name }}
 
   # Build for Windows x86_64
   build-windows:
@@ -131,7 +133,7 @@ jobs:
     name: build
     with:
       tag: ${{ needs.load-env.outputs.tag }}
-      binary: ${{ needs.load-env.outputs.binary }}
+      binary: ${{ needs.load-env.outputs.binary_name }}
 
 
   # Build for MacOS x86_64/ARM64
@@ -142,7 +144,7 @@ jobs:
     name: build
     with:
       tag: ${{ needs.load-env.outputs.tag }}
-      binary: ${{ needs.load-env.outputs.binary }}
+      binary: ${{ needs.load-env.outputs.binary_name }}
       run_macos_intel: ${{ needs.load-env.outputs.run_build_macos_intel }}
       run_macos_apple_silicon: ${{ needs.load-env.outputs.run_build_macos_apple_silicon }}
 
