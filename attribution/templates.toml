@@ -1,0 +1,20 @@
+[[template]]
+name = "bevy_template"
+version = "0.1.0"
+description = "A bevy template"
+license = "MIT OR Apache-2.0"
+authors = ["AmeKnite"]
+repository = "https://github.com/ameknite/bevy_template"
+
+[[template.based_on]]
+name = "bevy_github_ci_template"
+version = "0.1.0"
+license = "MIT OR Apache-2.0 OR CC0-1.0"
+repository = "https://github.com/bevyengine/bevy_github_ci_template"
+
+[[template.based_on]]
+name = "bevy_game_template"
+version = "0.1.0"
+license = "CC0-1.0"
+authors = ["Niklas Eicker <git@nikl.me>"]
+repository = "https://github.com/NiklasEi/bevy_game_template"

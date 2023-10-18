@@ -1,8 +1,15 @@
 [package]
-name = "bevy_game"
+name = "bevy_template"
 version = "0.1.0"
-edition = "2021"
+description = "A bevy template"
 license = "MIT OR Apache-2.0"
+authors = ["AmeKnite"]
+repository = "https://github.com/ameknite/bevy-template"
+edition = "2021"
+rust-version = "1.70.0"
+readme = "README.md"
+keywords = ["bevy", "template", "game"]
+categories = ["game-development"]
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
@@ -13,13 +20,10 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-bevy = { version = "0.11", default-features = false}
+bevy = { version = "0.11", default-features = false }
 
 [features]
-default = [
-    "webgpu",
-    "bevy/webgl2",
-]
+default = ["webgpu", "bevy/webgl2"]
 
 webgpu = [
     "bevy/animation",
