@@ -1,0 +1,7 @@
+[self]
+name = "bevy_template"
+version = "0.1.0"
+description = "A bevy template"
+license = "MIT OR Apache-2.0"
+authors = ["AmeKnite"]
+repository = "https://github.com/ameknite/bevy-template"

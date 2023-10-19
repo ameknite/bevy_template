@@ -542,14 +542,6 @@ repository = "https://github.com/bevyengine/bevy"
 homepage = "https://bevyengine.org"
 
 [[dependency]]
-name = "bevy_template"
-version = "0.1.0"
-description = "A bevy template"
-license = "MIT OR Apache-2.0"
-authors = ["AmeKnite"]
-repository = "https://github.com/ameknite/bevy-template"
-
-[[dependency]]
 name = "bevy_text"
 version = "0.11.3"
 description = "Provides text functionality for Bevy Engine"
