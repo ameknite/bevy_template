@@ -57,6 +57,7 @@ jobs:
         run: |
           wasm-bindgen --no-typescript --out-name bevy_game --out-dir web --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
           cp -r assets web/
+          cp -r attribution web/
 
       - name: Optimize wasm
         if: inputs.optimize_wasm == 'true'
@@ -117,6 +118,7 @@ jobs:
         run: |
           wasm-bindgen --no-typescript --out-name bevy_game --out-dir web --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
           cp -r assets web/
+          cp -r attribution web/
 
       - name: Optimize wasm
         if: inputs.optimize_wasm == 'true'
