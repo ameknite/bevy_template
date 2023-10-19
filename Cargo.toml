@@ -56,7 +56,7 @@ opt-level = 3
 
 [profile.release]
 opt-level = 3     # All optimizations - faster runtime code
-lto = true
+lto = true        # Perform link-time optimizations
 codegen-units = 1 # Allow for maximum size reduction optimizations
 strip = true      # Automatically strip symbols from the binary.
 panic = "abort"   # Removes the need for extra unwinding code.
