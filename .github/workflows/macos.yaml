@@ -81,7 +81,7 @@ jobs:
 
       - name: Build
         run: |
-         cargo build --release --target aarch64-apple-darwin
+         cargo build --profile thin --target aarch64-apple-darwin
 
       - name: Set Paths
         id: set_paths

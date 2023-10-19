@@ -60,3 +60,7 @@ lto = true        # Perform link-time optimizations
 codegen-units = 1 # Allow for maximum size reduction optimizations
 strip = true      # Automatically strip symbols from the binary.
 panic = "abort"   # Removes the need for extra unwinding code.
+
+[profile.thin]
+inherits = "release"
+lto = "thin"         # Breaks with "fat" in MacOS Apple-Silicon
