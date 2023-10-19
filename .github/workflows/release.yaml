@@ -161,22 +161,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - artifact_name: web
-            os: ubuntu-latest
-          - artifact_name: linux
-            os: ubuntu-latest
-          - artifact_name: windows
-            os: windows-latest
-          - artifact_name: macos_apple_silicon
-            os: macos-latest
-          - artifact_name: macos_intel
-            os: macos-latest
+        artifact_name: [webgl, webgpu, linux, windows, macos_apple_silicon, macos_intel]
     uses: ./.github/workflows/github_releases.yaml
     name: publish / github-releases
     with:
       tag: ${{ needs.load-env.outputs.tag }}
-      os: ${{ matrix.os }}
       artifact_name: ${{ matrix.artifact_name }}
     secrets: inherit
 
