@@ -1,4 +1,4 @@
-[[template]]
+[template]
 name = "bevy_template"
 version = "0.1.0"
 description = "A bevy template"
