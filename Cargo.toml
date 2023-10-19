@@ -56,7 +56,7 @@ opt-level = 3
 
 [profile.release]
 opt-level = 3     # All optimizations - faster runtime code
-lto = "fat"       # Produce better optimized cod
+lto = "fat"       # Link-time optimizations - Produce better optimized code
 codegen-units = 1 # Improve the performance of generated code
 
 [profile.thin]
