@@ -53,8 +53,6 @@ on:
         description: "Add tag version: (e.g. -> v3.6.1)"
         required: true
         type: string
-      binary_name:
-        type: string
       build_for:
         description: "Build for:"
         default: wasm,linux,windows,macos
@@ -98,7 +96,7 @@ jobs:
       web_graphic_api: ${{(inputs.tag && inputs.web_graphic_api) || (!inputs.tag && env.web_graphic_api)}}
       itchio_target: ${{ inputs.itchio_target || env.itchio_target }}
       tag: ${{ ( inputs.tag || steps.get_version.outputs.tag ) }}
-      binary_name: ${{ inputs.binary_name ||  env.binary_name }}
+      binary_name: ${{ env.binary_name }}
 
   # Build for Web/WASM
   build-web:
