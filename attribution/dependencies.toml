@@ -363,6 +363,14 @@ repository = "https://github.com/bevyengine/bevy"
 homepage = "https://bevyengine.org"
 
 [[dependency]]
+name = "bevy_dylib"
+version = "0.11.3"
+description = "Force the Bevy Engine to be dynamically linked for faster linking"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/bevyengine/bevy"
+homepage = "https://bevyengine.org"
+
+[[dependency]]
 name = "bevy_ecs"
 version = "0.11.3"
 description = "Bevy Engine's entity component system"
@@ -2648,7 +2656,7 @@ repository = "https://github.com/toml-rs/toml"
 
 [[dependency]]
 name = "tracing"
-version = "0.1.39"
+version = "0.1.40"
 description = """
 Application-level tracing for Rust.
 """
@@ -2793,7 +2801,7 @@ repository = "https://github.com/unicode-rs/unicode-xid"
 
 [[dependency]]
 name = "uuid"
-version = "1.4.1"
+version = "1.5.0"
 description = "A library to generate and parse UUIDs."
 license = "Apache-2.0 OR MIT"
 notices = [
