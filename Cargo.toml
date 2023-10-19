@@ -11,14 +11,6 @@ readme = "README.md"
 keywords = ["bevy", "template", "game"]
 categories = ["game-development"]
 
-# Enable a small amount of optimization in debug mode
-[profile.dev]
-opt-level = 1
-
-# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
-[profile.dev.package."*"]
-opt-level = 3
-
 [dependencies]
 bevy = { version = "0.11", default-features = false }
 
@@ -51,3 +43,20 @@ webgpu = [
     "bevy/tonemapping_luts",
     "bevy/default_font",
 ]
+
+dev = ["bevy/dynamic_linking"]
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
