@@ -56,8 +56,8 @@ opt-level = 3
 
 [profile.release]
 opt-level = 3     # All optimizations - faster runtime code
-lto = "fat"       # Perform link-time optimizations
-codegen-units = 1 # Allow for maximum size reduction optimizations
+lto = "fat"       # Produce better optimized cod
+codegen-units = 1 # Improve the performance of generated code
 
 [profile.thin]
 inherits = "release"
