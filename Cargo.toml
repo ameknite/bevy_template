@@ -44,7 +44,7 @@ webgpu = [
     "bevy/default_font",
 ]
 
-# dev = ["bevy/dynamic_linking"]
+dev = ["bevy/dynamic_linking"]
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
