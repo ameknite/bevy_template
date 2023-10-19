@@ -55,23 +55,23 @@ jobs:
 
       - name: Prepare package
         run: |
-          wasm-bindgen --no-typescript --out-name bevy_game --out-dir wasm --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
-          cp -r assets wasm/
+          wasm-bindgen --no-typescript --out-name bevy_game --out-dir web --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
+          cp -r assets web/
 
       - name: Optimize wasm
         if: inputs.optimize_wasm == 'true'
         run: |
-          wasm-opt -Oz --output wasm/bevy_game_bg.wasm wasm/bevy_game_bg.wasm
+          wasm-opt -Oz --output web/bevy_game_bg.wasm web/bevy_game_bg.wasm
 
       - name: Upload github-page to artifacts
         if: inputs.run_publish_github_pages == 'true' && inputs.web_graphic_api == 'webgl'
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./wasm
+          path: ./web
           retention-days: 1
 
       - name: Package as a zip
-        working-directory: ./wasm
+        working-directory: ./web
         run: |
           zip --recurse-paths ../${{ steps.set_file_name.outputs.file_name  }}.zip .
 
@@ -115,23 +115,23 @@ jobs:
 
       - name: Prepare package
         run: |
-          wasm-bindgen --no-typescript --out-name bevy_game --out-dir wasm --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
-          cp -r assets wasm/
+          wasm-bindgen --no-typescript --out-name bevy_game --out-dir web --target web target/wasm32-unknown-unknown/release/${{ inputs.binary }}.wasm
+          cp -r assets web/
 
       - name: Optimize wasm
         if: inputs.optimize_wasm == 'true'
         run: |
-          wasm-opt -Oz --output wasm/bevy_game_bg.wasm wasm/bevy_game_bg.wasm
+          wasm-opt -Oz --output web/bevy_game_bg.wasm web/bevy_game_bg.wasm
 
       - name: Upload github-page to artifacts
         if: inputs.run_publish_github_pages == 'true' && inputs.web_graphic_api == 'webgpu'
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./wasm
+          path: ./web
           retention-days: 1
 
       - name: Package as a zip
-        working-directory: ./wasm
+        working-directory: ./web
         run: |
           zip --recurse-paths ../${{ steps.set_file_name.outputs.file_name  }}.zip .
 
