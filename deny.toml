@@ -14,7 +14,7 @@ ignore = []
 
 [licenses]
 unlicensed = "deny"
-allow = []
+allow = ["MPL-2.0"]
 deny = []
 copyleft = "deny"
 allow-osi-fsf-free = "either"
