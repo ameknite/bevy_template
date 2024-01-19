@@ -6,13 +6,13 @@ license = "MIT OR Apache-2.0"
 authors = ["AmeKnite"]
 repository = "https://github.com/ameknite/bevy_template"
 edition = "2021"
-rust-version = "1.70.0"
+rust-version = "1.72.1"
 readme = "README.md"
 keywords = ["bevy", "template", "game"]
 categories = ["game-development"]
 
 [dependencies]
-bevy = { version = "0.11.3", default-features = false }
+bevy = { version = "0.12.1", default-features = false }
 
 [features]
 default = ["webgpu", "bevy/webgl2"]
